@@ -50,9 +50,15 @@
         system:
         let
           pkgs = (self.legacyPackages.${system});
+          pdn-obstructions-plugin = pkgs.callPackage ./nix/pdn-obstructions.nix {
+            buildPythonPackage = pkgs.python3.pkgs.buildPythonPackage;
+            librelane = pkgs.python3.pkgs.librelane;
+            setuptools = pkgs.python3.pkgs.setuptools;
+          };
         in
         {
           default = pkgs.librelane-shell.override ({
+            librelane-plugins = ps: [ pdn-obstructions-plugin ];
             extra-packages = with pkgs; [
               # Tools
               gnumake
