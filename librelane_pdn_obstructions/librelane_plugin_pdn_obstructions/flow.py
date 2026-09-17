@@ -43,11 +43,10 @@ def get_routing_obstructions(config: Config):
         parsed_obstructions[layer].append(box)
 
     layers_spacing = {
-        "MET2": Decimal("0.28"),
-        "MET3": Decimal("0.28"),
-        "MET4": Decimal("0.28"),
-        "MET5": Decimal("0.28"),
-        "METTP": Decimal("0.46"),
+        "Metal2": Decimal("0.21"),
+        "Metal3": Decimal("0.21"),
+        "Metal4": Decimal("0.21"),
+        "TopMetal1": Decimal("1.64"),
     }
 
     for layer, spacing in layers_spacing.items():
@@ -62,7 +61,7 @@ def get_routing_obstructions(config: Config):
                 ]
             )
 
-            if layer == "MET5":
+            if layer == "TopMetal1":
                 obstruction_width = (
                     2 * config["PDN_HWIDTH"] + config["PDN_HSPACING"]
                 )
