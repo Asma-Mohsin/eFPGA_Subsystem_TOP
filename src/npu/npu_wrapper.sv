@@ -70,7 +70,7 @@ module npu_wrapper #(
     wire signed [NUM_PSUM_BANKS-1:0][PSUM_WIDTH-1:0]      psum_sram_rdata;
 
 `ifdef ASIC_MACROS
-    npu_core_macro npu_logic_core (
+    npu_top npu_logic_core (
         .clk_i              (clk_i),
         .rst_n              (rst_n),
         .array_en           (array_en),

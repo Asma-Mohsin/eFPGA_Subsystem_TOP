@@ -1,0 +1,156 @@
+meta:
+  version: 2
+  flow: Classic
+
+DESIGN_NAME: efpga_subsystem_top
+VERILOG_DEFINES:
+  - FUNCTIONAL
+  - ASIC_MACROS
+VERILOG_FILES:
+  - dir::../src/efpga_subsystem_top.sv
+  - dir::../src/efpga_axi_subsystem_wrapper.sv
+  - dir::../src/npu/*.sv
+  - dir::../src/sram_bank.sv
+  - dir::../src/AXI_Connector/*.sv
+  - dir::../src/*.v
+  - dir::../ip/FABulous/FABulous_demo_AXI_IO/Fabric/eFPGA_top.v
+  - dir::../ip/FABulous/FABulous_demo_AXI_IO/Fabric/eFPGA_Config.v
+  - dir::../ip/FABulous/FABulous_demo_AXI_IO/Fabric/config_UART.v
+  - dir::../ip/FABulous/FABulous_demo_AXI_IO/Fabric/bitbang.v
+  - dir::../ip/FABulous/FABulous_demo_AXI_IO/Fabric/ConfigFSM.v
+  - dir::../ip/FABulous/FABulous_demo_AXI_IO/Fabric/Frame_Data_Reg.v
+  - dir::../ip/FABulous/FABulous_demo_AXI_IO/Fabric/Frame_Select.v
+
+CLOCK_PORT: clk_i
+CLOCK_PERIOD: 10.0
+USE_SLANG: True
+SLANG_ARGUMENTS: ['--keep-hierarchy']
+
+FP_SIZING: absolute
+DIE_AREA: [0, 0, 3000, 3500]
+PL_TARGET_DENSITY_PCT: 50
+GRT_ALLOW_CONGESTION: true
+ROUTING_OBSTRUCTIONS:
+  - [TopMetal1, 240, 240, 2698.560, 2506.320]
+FP_OBSTRUCTIONS:
+  - [240, 240, 4800, 5147.0]
+VDD_NETS: [VDD]
+GND_NETS: [VSS]
+
+PDN_MACRO_CONNECTIONS:
+  - "efpga_subsystem_inst\\.fabric_inst\\.eFPGA_inst.* VDD VSS VPWR VGND"
+  #- "efpga_subsystem_inst\\.npu_inst\\.npu_logic_core.* VDD VSS VDD VSS"
+  - "efpga_subsystem_inst\\.npu_inst\\.gen_act_srams.*\\.act_sram_inst.* VDD VSS VDD! VSS!"
+  - "efpga_subsystem_inst\\.npu_inst\\.gen_psum_srams.*\\.psum_sram_inst.* VDD VSS VDD! VSS!"
+
+MACROS:
+  eFPGA:
+    gds:
+      - dir::../ip/FABulous/FABulous_demo_AXI_IO/Fabric/macro/final_views/gds/eFPGA.gds
+    lef:
+      - dir::../ip/FABulous/FABulous_demo_AXI_IO/Fabric/macro/final_views/lef/eFPGA.lef
+    nl:
+      - dir::../ip/FABulous/FABulous_demo_AXI_IO/Fabric/macro/final_views/nl/eFPGA.nl.v
+    instances:
+      efpga_subsystem_inst.fabric_inst.eFPGA_inst:
+        location: [240, 240]
+        orientation: N
+  #npu_top:
+  #  gds:
+  #    - dir::../ip/npu/runs/RUN_2026-09-21_14-11-07/final/gds/npu_top.gds
+  #  lef:
+  #    - dir::../ip/npu/runs/RUN_2026-09-21_14-11-07/final/lef/npu_top.lef
+  #  nl:
+  #    - dir::../ip/npu/runs/RUN_2026-09-21_14-11-07/final/nl/npu_top.nl.v
+  #  instances:
+  #    efpga_subsystem_inst.npu_inst.npu_logic_core:
+  #      location: [2880, 240]
+  #      orientation: N
+  RM_IHPSG13_1P_512x8_c3_bm_bist:
+    gds:
+      - dir::../IHP-Open-PDK/ihp-sg13g2/libs.ref/sg13g2_sram/gds/RM_IHPSG13_1P_512x8_c3_bm_bist.gds
+    lef:
+      - dir::../IHP-Open-PDK/ihp-sg13g2/libs.ref/sg13g2_sram/lef/RM_IHPSG13_1P_512x8_c3_bm_bist.lef
+    nl:
+      - dir::../IHP-Open-PDK/ihp-sg13g2/libs.ref/sg13g2_sram/verilog/RM_IHPSG13_1P_512x8_c3_bm_bist.v
+    instances:
+      efpga_subsystem_inst.npu_inst.gen_act_srams[0].act_sram_inst.gen_ihp_512x8.u_sram_512x8:
+        location: [2750, 240]
+        orientation: S
+      efpga_subsystem_inst.npu_inst.gen_act_srams[1].act_sram_inst.gen_ihp_512x8.u_sram_512x8:
+        location: [2750, 480]
+        orientation: S
+      efpga_subsystem_inst.npu_inst.gen_act_srams[2].act_sram_inst.gen_ihp_512x8.u_sram_512x8:
+        location: [2750, 720]
+        orientation: S
+      efpga_subsystem_inst.npu_inst.gen_act_srams[3].act_sram_inst.gen_ihp_512x8.u_sram_512x8:
+        location: [2750, 960]
+        orientation: S
+      efpga_subsystem_inst.npu_inst.gen_act_srams[4].act_sram_inst.gen_ihp_512x8.u_sram_512x8:
+        location: [2750, 1200]
+        orientation: S
+      efpga_subsystem_inst.npu_inst.gen_act_srams[5].act_sram_inst.gen_ihp_512x8.u_sram_512x8:
+        location: [2750, 1440]
+        orientation: S
+      efpga_subsystem_inst.npu_inst.gen_act_srams[6].act_sram_inst.gen_ihp_512x8.u_sram_512x8:
+        location: [2750, 1680]
+        orientation: S
+      efpga_subsystem_inst.npu_inst.gen_act_srams[7].act_sram_inst.gen_ihp_512x8.u_sram_512x8:
+        location: [2750, 1920]
+        orientation: S
+  RM_IHPSG13_1P_256x32_c2_bm_bist:
+    gds:
+      - dir::../IHP-Open-PDK/ihp-sg13g2/libs.ref/sg13g2_sram/gds/RM_IHPSG13_1P_256x32_c2_bm_bist.gds
+    lef:
+      - dir::../IHP-Open-PDK/ihp-sg13g2/libs.ref/sg13g2_sram/lef/RM_IHPSG13_1P_256x32_c2_bm_bist.lef
+    nl:
+      - dir::../IHP-Open-PDK/ihp-sg13g2/libs.ref/sg13g2_sram/verilog/RM_IHPSG13_1P_256x32_c2_bm_bist.v
+    instances:
+      efpga_subsystem_inst.npu_inst.gen_psum_srams[0].psum_sram_inst.gen_ihp_256x32.u_sram_256x32:
+        location: [300, 2600]
+        orientation: N
+      efpga_subsystem_inst.npu_inst.gen_psum_srams[1].psum_sram_inst.gen_ihp_256x32.u_sram_256x32:
+        location: [720, 2600]
+        orientation: N
+      efpga_subsystem_inst.npu_inst.gen_psum_srams[2].psum_sram_inst.gen_ihp_256x32.u_sram_256x32:
+        location: [1140, 2600]
+        orientation: N
+      efpga_subsystem_inst.npu_inst.gen_psum_srams[3].psum_sram_inst.gen_ihp_256x32.u_sram_256x32:
+        location: [1560, 2600]
+        orientation: N
+      efpga_subsystem_inst.npu_inst.gen_psum_srams[4].psum_sram_inst.gen_ihp_256x32.u_sram_256x32:
+        location: [1980, 2600]
+        orientation: N
+      efpga_subsystem_inst.npu_inst.gen_psum_srams[5].psum_sram_inst.gen_ihp_256x32.u_sram_256x32:
+        location: [2400, 2600]
+        orientation: N
+      efpga_subsystem_inst.npu_inst.gen_psum_srams[6].psum_sram_inst.gen_ihp_256x32.u_sram_256x32:
+        location: [300, 2800]
+        orientation: N
+      efpga_subsystem_inst.npu_inst.gen_psum_srams[7].psum_sram_inst.gen_ihp_256x32.u_sram_256x32:
+        location: [720, 2800]
+        orientation: N
+      efpga_subsystem_inst.npu_inst.gen_psum_srams[8].psum_sram_inst.gen_ihp_256x32.u_sram_256x32:
+        location: [1140, 2800]
+        orientation: N
+      efpga_subsystem_inst.npu_inst.gen_psum_srams[9].psum_sram_inst.gen_ihp_256x32.u_sram_256x32:
+        location: [1560, 2800]
+        orientation: N
+      efpga_subsystem_inst.npu_inst.gen_psum_srams[10].psum_sram_inst.gen_ihp_256x32.u_sram_256x32:
+        location: [1980, 2800]
+        orientation: N
+      efpga_subsystem_inst.npu_inst.gen_psum_srams[11].psum_sram_inst.gen_ihp_256x32.u_sram_256x32:
+        location: [2400, 2800]
+        orientation: N
+      efpga_subsystem_inst.npu_inst.gen_psum_srams[12].psum_sram_inst.gen_ihp_256x32.u_sram_256x32:
+        location: [300, 3000]
+        orientation: N
+      efpga_subsystem_inst.npu_inst.gen_psum_srams[13].psum_sram_inst.gen_ihp_256x32.u_sram_256x32:
+        location: [720, 3000]
+        orientation: N
+      efpga_subsystem_inst.npu_inst.gen_psum_srams[14].psum_sram_inst.gen_ihp_256x32.u_sram_256x32:
+        location: [1140, 3000]
+        orientation: N
+      efpga_subsystem_inst.npu_inst.gen_psum_srams[15].psum_sram_inst.gen_ihp_256x32.u_sram_256x32:
+        location: [1560, 3000]
+        orientation: N

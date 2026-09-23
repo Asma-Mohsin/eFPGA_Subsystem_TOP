@@ -4,7 +4,7 @@ PDK ?= ihp-sg13cmos5l
 PDK_ROOT ?= $(abspath ../../IHP-Open-PDK)
 COMMON_CONFIG ?= Tile/include/common.yaml
 TILE_DIR ?= Tile
-TILES ?= LUT4AB
+TILES ?= LUT4AB AXI_M_IO_W
 
 TILE_PATHS := $(addprefix $(TILE_DIR)/,$(TILES))
 TILE_PATHS_OPENROAD := $(addsuffix -openroad,$(TILE_PATHS))

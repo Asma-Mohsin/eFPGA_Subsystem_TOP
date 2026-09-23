@@ -5,7 +5,7 @@ meta:
   substituting_steps:
 
 
-DESIGN_NAME: npu_top
+DESIGN_NAME: systolic_array
 
 VERILOG_FILES:
 - dir::src/*.sv
@@ -40,9 +40,9 @@ PL_RESIZER_SETUP_MAX_BUFFER_PCT: 60
 FP_SIZING: absolute
 SYNTH_STRATEGY: "AREA 2"
 
-DIE_AREA: [0, 0, 1410, 1410]
+DIE_AREA: [0, 0, 1250, 1250]
 
-PL_TARGET_DENSITY_PCT: 80
+PL_TARGET_DENSITY_PCT: 50
 GRT_ALLOW_CONGESTION: true
 
 # Allow free displacement (set to number that is definitely bigger than the die

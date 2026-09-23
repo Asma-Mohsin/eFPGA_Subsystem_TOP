@@ -150,7 +150,7 @@ module efpga_axi_subsystem_wrapper #(
     // 1. Single eFPGA Fabric Instance
     // =========================================================================
 `ifdef ASIC_MACROS
-    eFPGA_top_macro fabric_inst (
+    eFPGA_top fabric_inst (
         // --- Clocks and Resets ---
         .CLK                 (clk_i),
         .resetn              (rstn_i & ~efpga_soft_reset_i),
@@ -285,7 +285,7 @@ module efpga_axi_subsystem_wrapper #(
         // --- Slot 0: AXI-Full Master (DMA to SoC) ---
         .AXI_M_SOC_AWADDR    (dma_s_awaddr  [31:0]),
         .AXI_M_SOC_AWLEN     (dma_s_awlen   [7:0]),
-        .AXI_M_SOC_AWSIZE    (dma_s_arsize  [2:0]),
+        .AXI_M_SOC_AWSIZE    (dma_s_awsize  [2:0]),
         .AXI_M_SOC_AWBURST   (dma_s_awburst [1:0]),
         .AXI_M_SOC_AWVALID   (dma_s_awvalid [0]),
         .AXI_M_SOC_AWREADY   (dma_s_awready [0]),
