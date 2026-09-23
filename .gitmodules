@@ -1,0 +1,3 @@
+[submodule "ip/FABulous"]
+	path = ip/FABulous
+	url = git@github.com:Asma-Mohsin/FABulous.git
