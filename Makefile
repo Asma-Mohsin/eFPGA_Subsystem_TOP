@@ -64,3 +64,11 @@ precheck-demo: $(PDK_ROOT)/$(PDK) ## Run the demo precheck (don't use for submis
 klayout: $(PDK_ROOT)/$(PDK) ## Open KLayout (edit mode)
 	KLAYOUT_PATH=$(PDK_ROOT)/$(PDK)/libs.tech/klayout/ klayout -e -n sg13cmos5l -c $(MAKEFILE_DIR)/config/klayoutrc
 .PHONY: klayout
+
+librelane: $(PDK_ROOT)/$(PDK) ## Run the top-level LibreLane flow
+	nix develop --command librelane --manual-pdk --pdk-root $(PDK_ROOT) --pdk $(PDK) $(MAKEFILE_DIR)/librelane/config.yaml
+.PHONY: librelane
+
+librelane-openroad: $(PDK_ROOT)/$(PDK) ## Run the top-level LibreLane flow with OpenROAD
+	nix develop --command librelane --manual-pdk --pdk-root $(PDK_ROOT) --pdk $(PDK) $(MAKEFILE_DIR)/librelane/config.yaml --last-run --flow OpenInOpenROAD
+.PHONY: librelane-openroad
